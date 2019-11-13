@@ -8,6 +8,13 @@ PIP		= $(CWD)/bin/pip3
 run: $(MODULE).py $(MODULE).ini
 	$(PY) $^
 
+MERGE  = Makefile README.md .gitignore
+MERGE += $(MODULE).py $(MODULE).ini static templates
+
+merge: $(MERGE)
+	git checkout master
+	git checkout shadow -- $(MERGE)
+
 install: $(PIP) $(MODULE).py $(MODULE).ini
 	$(MAKE) update
 
