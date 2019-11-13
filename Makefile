@@ -20,7 +20,7 @@ REL = $(shell git rev-parse --short=4 HEAD)
 
 release:
 	- git tag $(NOW)-$(REL)
-	git push -v
+	git push -v && git push -v --tags
 	git checkout shadow
 
 install: $(PIP) $(MODULE).py $(MODULE).ini
