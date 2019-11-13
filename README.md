@@ -56,3 +56,8 @@ IN THE SOFTWARE.
 * https://github.com/ponyatov/metaL
 * GraphDB
   * https://www.google.com/search?q=ullman+database+systems+%2Bpdf
+
+## SCORM reference LMS
+
+* http://cccp.ifmo.ru/scorm/index.html
+* https://github.com/instructure/canvas-lms/wiki

@@ -38,3 +38,7 @@ requirements.txt:
 venv: $(PIP)
 $(PIP):
 	python3 -m venv .
+
+.PHONY: wiki
+wiki:
+	cd wiki ; git pull -v

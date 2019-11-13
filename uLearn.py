@@ -54,6 +54,11 @@ class Frame:
     def _val(self):
         return '%s' % self.val
 
+    ## plot
+
+    def plot(self,dot=None,parent=None,color='black',link=''):
+        return self.dump()
+
     ## operators
 
     # ` A[key] get ` frame by slot name
@@ -160,12 +165,30 @@ web = flask.Flask(vm['MODULE'].val) ; vm['web'] = Web(web)
 web.secret_key = os.urandom(64)
 
 @web.route('/')
-def index(): return flask.render_template('index.html',vm=vm)
+def index(): return flask.render_template('index.html',vm=vm,frame=vm)
 
 @web.route('/<path>.css')
-def css(path): return flask.render_template(path+'.css',mimetype='text/css',vm=vm)
+def css(path): return flask.Response(flask.render_template(path+'.css',vm=vm),mimetype='text/css')
 
 @web.route('/<path>.png')
 def png(path): return web.send_static_file(path+'.png')
+
+@web.route('/dump/<path:path>')
+def dump(path):
+    frame = vm
+    for i in path.split('/'): frame = frame[i] ; print(frame)
+    return flask.render_template('dump.html',vm=vm,frame=frame)
+
+@web.route('/plot/<path:path>')
+def plot(path):
+    frame = vm
+    for i in path.split('/'): frame = frame[i] ; print(frame)
+    return flask.Response(flask.render_template('plot.html',vm=vm,frame=frame))#,mimetype='image/png')
+
+@web.route('/<path:path>')
+def render(path):
+    frame = vm
+    for i in path.split('/'): frame = frame[i]
+    return flask.render_template('index.html',vm=vm,frame=frame)
 
 web.run(host=HOST,port=PORT,debug=True,extra_files=[vm['ini'].val])
