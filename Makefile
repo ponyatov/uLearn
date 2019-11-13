@@ -15,6 +15,14 @@ merge: $(MERGE)
 	git checkout master
 	git checkout shadow -- $(MERGE)
 
+NOW = $(shell date +%d%m%y)
+REL = $(shell git rev-parse --short=4 HEAD)
+
+release:
+	- git tag $(NOW)-$(REL)
+	git push -v
+	git checkout shadow
+
 install: $(PIP) $(MODULE).py $(MODULE).ini
 	$(MAKE) update
 
