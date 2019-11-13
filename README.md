@@ -3,6 +3,8 @@
 
 github: https://github.com/ponyatov/uLearn
 
+wiki:   https://github.com/ponyatov/uLearn/wiki
+
 ### MIT License
 
 Copyright (c) 2019 Dmitry Ponyatov <<dponyatov@gmail.com>>
